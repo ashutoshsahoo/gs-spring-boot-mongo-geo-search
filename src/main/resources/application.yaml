@@ -1,0 +1,6 @@
+spring:
+  data:
+    mongodb:
+      username: test_user
+      password: test_pwd123
+      auto-index-creation: true
