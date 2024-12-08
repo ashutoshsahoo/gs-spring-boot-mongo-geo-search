@@ -1,24 +1,28 @@
-package com.ashu.practice.clr;
+package com.ashu.practice.web;
 
 import com.ashu.practice.model.Pub;
 import com.ashu.practice.repo.PubRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.Metrics;
 import org.springframework.data.geo.Point;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-//@Component
+@RestController
+@RequestMapping(path = "/test")
 @RequiredArgsConstructor
 @Slf4j
-public class MonoGeoSearchCLR implements CommandLineRunner {
+public class PubController {
 
     private final PubRepository repository;
 
-    @Override
-    public void run(String... args) throws Exception {
+
+    @PostMapping
+    public void testSearch() {
+        log.info("Delete existing records");
         repository.deleteAll();
 
         repository.save(new Pub("George Canning", 3, 51.4678685, -0.0860632));
@@ -43,4 +47,5 @@ public class MonoGeoSearchCLR implements CommandLineRunner {
         repository.findByLocationNear(new Point(51.4634836, -0.0841914), new Distance(1, Metrics.KILOMETERS))
                 .forEach(pub -> log.info("Pub:{}", pub.getContent()));
     }
+
 }

@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: gs-spring-boot-mongo-geo-search
   data:
     mongodb:
       username: test_user
